@@ -29,7 +29,8 @@ def getName():
     return names
 def getArray():
     with open("data_file.json", mode='w', encoding='utf-8') as f:
-        json.dump(None, f)
+        request={"Запрос":query}
+        json.dump(request, f,ensure_ascii=False)
     namespace=getName()
     pricelist=getPrice()
     placelist=getMetro()
@@ -43,7 +44,7 @@ def getArray():
         entry={"name":name,"price":price,"place":place}
         print(entry)
         with open("data_file.json", mode='a',encoding='utf-8') as feedsjson:
-            json.dump(entry,feedsjson,ensure_ascii=False,)
+            json.dump(entry,feedsjson,ensure_ascii=False)
     return entry
 def GetImageContent():
     imagecontent=bsObj.findAll("img",{"class":"large-picture-img"})
