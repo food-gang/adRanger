@@ -31,8 +31,7 @@ def getName():
 def getHref():
     refs=[]
     href=bsObj.findAll("a",{"class":"item-description-title-link"})
-    for hreflist in href:
-        refs.append(namelist.span.get_text())
+    refs=[x["href"] for x in href]
     return refs
 def getArray():
     with open("data_file.json", mode='w', encoding='utf-8') as f:
@@ -42,16 +41,19 @@ def getArray():
     pricelist=getPrice()
     placelist=getMetro()
     imageurl=GetImageContent()
+    hrefs=getHref()
     count=-1
     for i in namespace:
         count=count+1
         name=namespace[count]
+        ref=hrefs[count]
+        ref="https://www.avito.ru"+ref
         price=pricelist[count]
         place=placelist[count]
         image=imageurl[count]
         image="https:"+image
         place = place.replace(u'\xa0', u' ')
-        entry={"name":name,"price":price,"place":place,"url":image}
+        entry={"name":name,"ref":ref,"price":price,"place":place,"url":image}
         print(entry)
         with open("data_file.json", mode='a',encoding='utf-8') as feedsjson:
             json.dump(entry,feedsjson,ensure_ascii=False)
