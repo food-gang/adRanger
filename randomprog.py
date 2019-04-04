@@ -4,7 +4,7 @@ from urllib.parse import quote
 from bs4 import BeautifulSoup
 import json
 import re
-
+#query=input()
 def getPrice(bsAvito):
     prices=bsAvito.findAll("span",{"itemprop":"price"})
     price = [x["content"] for x in prices]
@@ -38,15 +38,16 @@ def getArray(query):
     youla= urlopen("https://youla.ru/moskva?q="+quote(str(query)))
     bsAvito= BeautifulSoup(avito)
     bsYoula= BeautifulSoup(youla)
-    with open("static/js/data_file.json", mode='w', encoding='utf-8') as f:
-        request='{ exit:'
-        json.dump(request, f,ensure_ascii=False)
+    #with open("static/js/data_file.json", mode='w', encoding='utf-8') as f:
+        #request='{ exit:'
+    #    json.dump(request, f,ensure_ascii=False)
     namespace=getName(bsAvito)
     pricelist=getPrice(bsAvito)
     placelist=getMetro(bsAvito)
     imageurl=GetImageContent(bsAvito)
     hrefs=getHref(bsAvito)
     count=-1
+    entry={}
     for i in namespace:
         count=count+1
         name=namespace[count]
@@ -56,17 +57,19 @@ def getArray(query):
         place=placelist[count]
         image=imageurl[count]
         image="https:"+image
-
-        entry={"name":name,"ref":ref,"price":price,"place":str(place),"url":image}
+        id=1500+count
+        entryA={"name":name,"ref":ref,"price":price,"place":str(place),"url":image}
+        entry[str(id)]=entryA
         #print(entry)
-        with open("static/js/data_file.json", mode='a',encoding='utf-8') as feedsjson:
-            json.dump(entry,feedsjson,ensure_ascii=False)
+        #with open("static/js/data_file.json", mode='a',encoding='utf-8') as feedsjson:
+            #json.dump(entry,feedsjson,ensure_ascii=False)
     namespace=getNameY(bsYoula)
     pricelist=getPriceY(bsYoula)
     placelist=getMetroY(bsYoula)
     imageurl=GetImageContentY(bsYoula)
     hrefs=getHrefY(bsYoula)
     count=-1
+    entryYl=''
     for i in namespace:
         count=count+1
         name=namespace[count]
@@ -76,10 +79,12 @@ def getArray(query):
         place=placelist[count]
         image=imageurl[count]
         #place = place.replace(u'\xa0', u' ')
-        entry={"name":name,"ref":ref,"price":price,"place":place,"url":image}
+        id=500+count
+        entryY={"name":name,"ref":ref,"price":price,"place":str(place),"url":image}
+        entry[str(id)]=entryY
         #print(entry)
-        with open("static/js/data_file.json", mode='a',encoding='utf-8') as feedsjson:
-            json.dump(entry+'}',feedsjson,ensure_ascii=False)
+    with open("static/js/data_file.json", mode='w',encoding='utf-8') as feedsjson:
+        json.dump(entry,feedsjson,ensure_ascii=False)
     #return entry
 def GetImageContent(bsAvito):
     out=[]
@@ -127,3 +132,4 @@ def GetImageContentY(bsYoula):
         out.append(image.find("img"))
     output = [x["src"] for x in out]
     return output
+#getArray(query)

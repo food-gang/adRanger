@@ -1,7 +1,7 @@
 var loadGoods = function(){
         /* загрузка товаров на страницу */
         var request = new XMLHttpRequest();
-        request.open('GET', 'statc/js/data_file.json', true);
+        request.open('GET', '/static/js/data_file.json', true);
         console.log(request)
         request.onload = function() {
         if (request.status >= 200 && request.status < 400) {
@@ -16,12 +16,12 @@ var loadGoods = function(){
                     outJson += "<p class='namesp'> " +data[key].name+ ".</p>";
                     outJson += "<p>" +data[key].price+ "</p>";
                     outJson += "<p>" +data[key].place+ ".</p>";
-                    outJson +="<button><a href='"+data[key].ref+"> Купить</a></button>"
+                    outJson +="<button><a href='"+data[key].ref+"'> Купить</a></button>"
                     outJson += "</div>";
                 }
             }
             console.log(outJson)
-            goods.innerHTML = outJson;
+            post.innerHTML = outJson;
             //console.log(goods)
 
         } else {
