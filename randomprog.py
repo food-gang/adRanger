@@ -38,8 +38,8 @@ def getArray(query):
     youla= urlopen("https://youla.ru/moskva?q="+quote(str(query)))
     bsAvito= BeautifulSoup(avito)
     bsYoula= BeautifulSoup(youla)
-    with open("data_file.json", mode='w', encoding='utf-8') as f:
-        request={"Запрос":query}
+    with open("static/js/data_file.json", mode='w', encoding='utf-8') as f:
+        request='{ exit:'
         json.dump(request, f,ensure_ascii=False)
     namespace=getName(bsAvito)
     pricelist=getPrice(bsAvito)
@@ -59,7 +59,7 @@ def getArray(query):
 
         entry={"name":name,"ref":ref,"price":price,"place":str(place),"url":image}
         #print(entry)
-        with open("data_file.json", mode='a',encoding='utf-8') as feedsjson:
+        with open("static/js/data_file.json", mode='a',encoding='utf-8') as feedsjson:
             json.dump(entry,feedsjson,ensure_ascii=False)
     namespace=getNameY(bsYoula)
     pricelist=getPriceY(bsYoula)
@@ -78,8 +78,8 @@ def getArray(query):
         #place = place.replace(u'\xa0', u' ')
         entry={"name":name,"ref":ref,"price":price,"place":place,"url":image}
         #print(entry)
-        with open("data_file.json", mode='a',encoding='utf-8') as feedsjson:
-            json.dump(entry,feedsjson,ensure_ascii=False)
+        with open("static/js/data_file.json", mode='a',encoding='utf-8') as feedsjson:
+            json.dump(entry+'}',feedsjson,ensure_ascii=False)
     #return entry
 def GetImageContent(bsAvito):
     out=[]

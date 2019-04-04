@@ -23,7 +23,7 @@ def serach():
             print(query[one+7:end-1])
             getArray(query[one+7:end-1])
         except:
-            return 'Your request is bad:/'
+            print('Your request is bad:/')
     return render_template('Index.html', form=form)
 @app.route('/')
 def index():
