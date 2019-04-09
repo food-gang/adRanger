@@ -4,13 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/Jload.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/data_file.json') }}"></script>
-
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -34,19 +33,16 @@
   </div>
   <div class="container centered mainmenu">
     <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-10 joj">
+
         <form method=post>
-          {% from "_formhelpers.html" import render_field %}
-          {{ render_field(form.query) }}
-          <p><input type=submit value=Search>
+          {% from "_formhelpers.html" import render_field %}{{ render_field(form.query) }}<input id='search' class="btn btn-success" type=submit value=Поиск>
         </form>
-      </div>
-      <div class="col-md-1"></div>
+
     </div>
   </div>
-  <div id='post'> none</div>
+  <div id='post' class="container"></div>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
   </body>
 </html>

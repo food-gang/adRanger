@@ -74,3 +74,32 @@ hr {
 .joj {
 	background-color: #28c397;
 }
+.search{
+	background-color: #28c397;
+}
+.row{
+	background-color: #28c397;
+}
+form{
+	margin-left: 15px;
+	height: 70px;
+}
+dd{
+	display: inline-block;
+	width: 75%;
+}
+dt{
+	display: inline-block;
+	width: 75%;
+}
+#query{
+	width: 100%;
+}
+.item{
+	height: auto;
+	width: 350px;
+	position: relative;
+	margin-left: auto;
+  margin-right: auto;
+	display: inline-block;
+}

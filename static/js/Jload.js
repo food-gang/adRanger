@@ -1,42 +1,41 @@
-var loadGoods = function(){
-        /* загрузка товаров на страницу */
-        var request = new XMLHttpRequest();
-        request.open('GET', '/static/js/data_file.json', true);
-        console.log(request)
-        request.onload = function() {
-        if (request.status >= 200 && request.status < 400) {
-            // Success!
-            console.log('request is ok!')
-            var data = JSON.parse(request.responseText);
-            var outJson = "";
-            for (var key in data) {
-                if (data.hasOwnProperty(key)) {
-                    outJson += "<div class='item'>;"
-                    outJson += "<img width='100px' src='" +data[key].url+ "'>";
-                    outJson += "<p class='namesp'> " +data[key].name+ ".</p>";
-                    outJson += "<p>" +data[key].price+ "</p>";
-                    outJson += "<p>" +data[key].place+ ".</p>";
-                    outJson +="<button><a href='"+data[key].ref+"'> Купить</a></button>"
-                    outJson += "</div>";
-                }
-            }
-            console.log(outJson)
-            post.innerHTML = outJson;
-            //console.log(goods)
 
-        } else {
-            // We reached our target server, but it returned an error
-            console.log('hule ne chitaetsa')
-        }
-        };
+//loadGoods()
+/*var loadGoods=function(){
+  $.getJSON('/static/js/data_file.json', function(data){
+  var items = [];
 
-        request.onerror = function() {
-        // There was a connection error of some sort
-        };
-
-        request.send();
-    };
-    loadGoods();﻿
-$(function(){
-  $('#post').html('sosi bibu lox');
+  $.each(data, function(key, val){
+    items.push('<li id="' + data[key] + '">' + data[val] + '</li>');
+  });
+  console.log(items)
+  $('<ul/>', {
+    'class': 'my-new-list',
+    html: items.join('')
+  }).appendTo('#post');
 });
+}*/
+function loadGoods() {
+    //загружаю товары на страницу
+    $.getJSON('/static/js/data_file.json', function (data) {
+        //console.log(data);
+        var out = '';
+        for (var key in data){
+            out+='<div class="item">';
+            out+='<h3>'+data[key]['name']+'</h3>';
+            out+='<p>Цена: '+data[key]['price']+'</p>';
+            out+='<img src="'+data[key].url+'">';
+            out+="<button><a href='"+data[key].ref+"'> Купить</a></button>";
+            out+='</div>';
+        }
+        $('#post').html(out);
+    })
+}
+loadGoods();
+/*window.onload = function() {
+  var x= document.getElementById("search");
+  x.onclick=loadGoods();
+  //x.onclick=  window.location.reload();
+}*/
+
+//document.getElementById("Search").onclick = loadGoods;
+//document.getElementById("Search").onclick = function () { alert('hello!'); };
