@@ -20,14 +20,17 @@ function loadGoods() {
         //console.log(data);
         var out = '';
         for (var key in data){
-            out+='<div class="item">';
-            out+='<h3>'+data[key]['name']+'</h3>';
-            out+='<p>Цена: '+data[key]['price']+'</p>';
-            out+='<img src="'+data[key].url+'">';
-            out+="<button><a href='"+data[key].ref+"'> Купить</a></button>";
+            out+='<div class="col-lg-3 col-md-6 pr1">';
+            out+='<div class="imagehere">';
+            out+='<img width=205px; height=205px; src="'+data[key].url+'" alt="photo">';
+            out+='</div>';
+            out+='<div class="text-center">';
+            out+='<h5><a href="'+data[key]['ref']+'"target="_blank">'+data[key]['name']+'</a></h5>';
+            out+='<h6>Цена:'+data[key]['price']+'</h6>';
+            out+='</div>';
             out+='</div>';
         }
-        $('#post').html(out);
+        $('#row').html(out);
     })
 }
 loadGoods();

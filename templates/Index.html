@@ -2,47 +2,67 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Вася сверстал норм так</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/Jload.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
   </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-inverse fixed-top">
+          <span class="navbar-text AR">AdRanger</span>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
+            <span class="navbar-toggler-icon"></span>
           </button>
-          <a href="#" class="navbar-brand">AdRanger</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="#">Контакты</a></li>
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
-          </ul>
-        </div>
-      </div>
-  </div>
-  <div class="container centered mainmenu">
-    <div class="row">
+          <div class="collapse navbar-collapse" id="collapse_target">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="#" class="nav-link">Основная</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">Контакты</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
 
-        <form method=post>
-          {% from "_formhelpers.html" import render_field %}{{ render_field(form.query) }}<input id='search' class="btn btn-success" type=submit value=Поиск>
-        </form>
+        <main>
 
-    </div>
-  </div>
-  <div id='post' class="container"></div>
+          <div class="container">
+            <form method='post'>
+              <div class="form-row nsearch">
+                <div class="col-10">
+                  {% from "_formhelpers.html" import render_field %}{{ render_field(form.query,class='form-control') }}
+                </div>
+                <div class="col-2">
+                  <button type="submit" name="button" class="btn btn-primary">Поиск</button>
+                </div>
+              </div>
+              <div class="form-group col-3 nsort">
+                <select class="form-control" name="" id="srt">
+                  <option selected>Как сортировать?</option>
+                  <option class="#">Я бич</option>
+                  <option class="#">Я мажор</option>
+                </select>
+              </div>
+            </form>
+          </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-  </body>
-</html>
+          <div class="container-fluid nproduct">
+            <div class="row" id='row'>Видимо мы ничего не нашли=(
+            </div>
+          </div>
+
+        </main>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+      </body>
+    </html>
