@@ -11,12 +11,12 @@ def getArray(query):
     start_time = time.time()
     #print("--- %s seconds ---" % (time.time() - start_time))
     try:
-        avito= urlopen("https://www.avito.ru/moskva?s_trg=3&q="+quote(str(query))+"&i=1")
+        avito= urlopen("https://www.avito.ru/?q="+quote(str(query))+"&i=1")
         bsAvito= BeautifulSoup(avito, features = "lxml")
     except:
         print()
     try:
-        youla= urlopen("https://youla.ru/moskva?q="+quote(str(query)))
+        youla= urlopen("https://youla.ru/?q="+quote(str(query)))
         bsYoula= BeautifulSoup(youla, features = "lxml")
     except:
         print()

@@ -20,7 +20,7 @@ function loadGoods() {
         //console.log(data);
         var out = '';
         for (var key in data){
-            out+='<div class="col-lg-3 col-md-6 pr1">';
+            out+='<div class="col-lg-3 col-md-6 pr1" data-price="'+data[key]['price']+'" >';
             out+='<div class="imagehere">';
             out+='<img width=205px; height=205px; src="'+data[key].url+'" alt="photo">';
             out+='</div>';
@@ -30,15 +30,15 @@ function loadGoods() {
             out+='</div>';
             out+='</div>';
         }
-        $('#row').html(out);
+        $('#rpr1').html(out);
     })
 }
-loadGoods();
-/*window.onload = function() {
+//loadGoods();
+window.onload = function() {
   var x= document.getElementById("search");
   x.onclick=loadGoods();
   //x.onclick=  window.location.reload();
-}*/
+}
 
 //document.getElementById("Search").onclick = loadGoods;
 //document.getElementById("Search").onclick = function () { alert('hello!'); };
