@@ -6,6 +6,6 @@
     (on virtualenv)pip install Flask
     pip install -U WTForms
     pip install beautifulsoup4
-    sudo apt-get install python3-lxml
+    pip install lxml
 ## 3. To start: python3 Flask.py
 ## 4. if you have problems with start install unreached packets
