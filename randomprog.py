@@ -7,21 +7,41 @@ import re
 import time
 from lxml.html.soupparser import fromstring
 #query=input()
-def getArray(query):
+def getArray(query,sort,category):
     start_time = time.time()
     #print("--- %s seconds ---" % (time.time() - start_time))
-    try:
-        avito= urlopen("https://www.avito.ru/?q="+quote(str(query))+"&i=1")
-        bsAvito= BeautifulSoup(avito, features = "lxml")
-    except:
-        print()
-    try:
-        youla= urlopen("https://youla.ru/?q="+quote(str(query)))
-        bsYoula= BeautifulSoup(youla, features = "lxml")
-    except:
-        print()
-
-
+    if int(sort)==2:
+        asort="&s=2"
+        ysort=""
+    elif int(sort)==1:
+        asort="&s=1"
+        ysort="attributes[sort_field]=price&"
+    else:
+        asort=""
+        ysort=""
+    Acategory=""
+    Ycategory=""
+    categories={0:'transport',1:'nedvizhimost',2:'predlozheniya_uslug',3:'lichnye_veschi',4:'rabota',5:'zhivotnye',6:'dlya_biznesa'}
+    for key,value in categories.items():
+        if int(key) == int(category):
+            Acategory=value
+            break;
+    avito= urlopen("https://www.avito.ru//moskva/"+quote(str(Acategory))+"?q="+quote(str(query))+quote(str(asort)))
+    bsAvito= BeautifulSoup(avito, features = "lxml")
+    categories={0:'cars/',1:'nedvijimost?',2:'uslugi?',3:'',4:'rabota?',5:'zhivotnye?',6:'dlya-biznesa?'}
+    dc=""
+    for key,value in categories.items():
+        if int(key) == int(category):
+            Ycategory=value
+            if Ycategory=='cars/':
+                dc="auto."
+                if int(sort)==1:
+                    ysort="searchOrder=1&"
+                elif int(sort)==2:
+                    ysort="searchOrder=2&"
+            break;
+    youla= urlopen("https://"+quote(str(dc))+"youla.ru/moskva/"+quote(str(Ycategory))+"?"+ysort+"q="+quote(str(query)))
+    bsYoula= BeautifulSoup(youla, features = "lxml")
     print("--- %s seconds ---" % (time.time() - start_time))
     #with open("static/js/data_file.json", mode='w', encoding='utf-8') as f:
         #request='{ exit:'

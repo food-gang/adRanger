@@ -2,7 +2,7 @@ from flask import Flask,render_template,session,redirect,url_for,send_file,send_
 from randomprog import getArray
 from flask import request
 import os
-from wtforms import Form, BooleanField, StringField, PasswordField, validators
+from wtforms import *
 
 app=Flask(__name__)
 app.config['SECRET_KEY']='Salam aleikym'
@@ -11,17 +11,21 @@ app.config['SECRET_KEY']='Salam aleikym'
 
 class SearchForm(Form):
     query=StringField('Search')
-
+    sort=SelectField('', choices=[(0,'по умолчанию'),(1, 'Дешевле'), (2,'Дороже')])
+    category=SelectField('',choices=[(-1,'Все категории'),(0,'Транспорт'),(1,'Недвижимость'),(2,'Услуги'),(3,'Личные вещи'),(4,'Работа'),(5,'Животные'),(6,'Бизнес')])
 @app.route('/', methods=['GET', 'POST'])
 def search():
     form=SearchForm(request.form)
     if request.method=='POST':
         #try:
             query=str(form.query)
+            sort=form.sort.data
+            if form.category.data !=None:
+                category=form.category.data
             one=query.find("value=")
             end=query.find(">")
-            print(query[one+7:end-1])
-            getArray(query[one+7:end-1])
+            print(query[one+7:end-1],sort,category)
+            getArray(query[one+7:end-1],sort,category)
             #response = send_from_directory(directory='static/js', filename='data_file.json')
             return render_template("Index.html", form=form)
         #except:
