@@ -7,6 +7,7 @@
     pip install Flask
     pip install -U WTForms
     pip install beautifulsoup4
+    pip install lxml
     sudo apt-get install python3-lxml
 ## 3. To start: python3 Flask.py
 ## 4. if you have problems with start install unreached packets
