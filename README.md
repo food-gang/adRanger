@@ -1,6 +1,7 @@
 # adRanger-
 
 ## Это агрегатор досок объявлений Avito и Юла.
+# агрегатор парсит доски и выдаёт информацию по ващему запросу
 # Installation
 ## 1.install python3 or more
 ## 2. install packets: pip,Flask,wtforms,beautifulsoup,lxml parser
